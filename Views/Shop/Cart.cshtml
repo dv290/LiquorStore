@@ -1,0 +1,66 @@
+﻿@model List<LiquorStore.Web.ViewModels.ShoppingCartModels.ShoppingCartItem>
+
+@{
+    ViewData["Title"] = "Vaša košarica";
+    decimal total = 0;
+}
+
+<h1>Vaša košarica</h1>
+
+@if (Model == null || !Model.Any())
+{
+    <div class="alert alert-info" role="alert">
+        Vaša košarica je prazna. <a asp-action="Index">Nastavite kupovati</a>.
+    </div>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Proizvod</th>
+                <th>Količina</th>
+                <th>Cijena po komadu</th>
+                <th>Ukupna cijena</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                total += (item.Quantity * item.Price);
+                <tr>
+                    <td>
+                        @item.Product.Name
+                    </td>
+                    <td>
+                        @item.Quantity
+                    </td>
+                    <td>
+                        @item.Price.ToString("C") 
+                    </td>
+                    <td>
+                        @((item.Quantity * item.Price).ToString("C"))
+                    </td>
+                    <td>
+                        <a asp-action="RemoveFromCart" asp-route-id="@item.ProductId" class="btn btn-sm btn-warning">Smanji</a> |
+                        <a asp-action="ClearItemFromCart" asp-route-id="@item.ProductId" class="btn btn-sm btn-danger">Ukloni</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="3" class="text-end"><strong>Ukupno za platiti:</strong></td>
+                <td><strong>@total.ToString("C")</strong></td>
+                <td></td>
+            </tr>
+        </tfoot>
+    </table>
+
+    <div class="mt-3">
+        <a asp-action="Index" class="btn btn-secondary">Nastavi kupovati</a>
+        <a asp-action="ClearCart" class="btn btn-outline-danger">Isprazni košaricu</a>
+        <a asp-action="Checkout" class="btn btn-success float-end">Nastavi na plaćanje</a> 
+    </div>
+}

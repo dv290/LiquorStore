@@ -1,0 +1,95 @@
+﻿@model LiquorStore.Model.Order
+
+@{
+    ViewData["Title"] = "Potvrda Narudžbe";
+}
+
+<div class="container my-5">
+    <div class="text-center mb-4">
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <h4 class="alert-heading mb-2">@TempData["SuccessMessage"]</h4>
+                <p>Hvala vam na kupnji!</p>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        }
+        <h1 class="display-4 fw-bold text-success">Narudžba Primljena!</h1>
+        <p class="lead text-muted">Vaša narudžba je uspješno zaprimljena.</p>
+        <p class="fs-5">Broj narudžbe: <strong class="text-primary">#@Model.OrderId</strong></p>
+        <p class="fs-5">Potvrda je poslana na vaš email: <strong class="text-info">@Model.ContactEmail</strong></p>
+    </div>
+
+    <hr class="my-5">
+
+    <div class="row">
+        <div class="col-lg-7 col-md-12 mb-4">
+            <h3 class="mb-3 text-secondary">Detalji narudžbe</h3>
+            <div class="card shadow-sm p-4">
+                <dl class="row mb-0">
+                    <dt class="col-sm-4 text-dark">Datum narudžbe:</dt>
+                    <dd class="col-sm-8">@Model.OrderDate.ToString("dd.MM.yyyy. HH:mm")</dd>
+
+                    <dt class="col-sm-4 text-dark">Status:</dt>
+                    <dd class="col-sm-8">
+                        <span class="badge bg-info text-dark">@Model.OrderStatus</span>
+                    </dd>
+
+                    <dt class="col-sm-4 text-dark">Ukupan iznos:</dt>
+                    <dd class="col-sm-8 fs-4 text-success fw-bold">
+                        @Model.TotalAmount € 
+                    </dd>
+                </dl>
+            </div>
+        </div>
+
+        <div class="col-lg-5 col-md-12 mb-4">
+            <h3 class="mb-3 text-secondary">Adresa dostave</h3>
+            <div class="card shadow-sm p-4">
+                <address class="mb-0">
+                    <strong>@Model.ShippingAddress</strong><br>
+                    @Model.ShippingPostalCode @Model.ShippingCity<br>
+                    @Model.ShippingCountry<br>
+                    <abbr title="Telefon">Tel:</abbr> @Model.ContactPhoneNumber
+                </address>
+            </div>
+        </div>
+    </div>
+
+    <hr class="my-5">
+
+    <h3 class="mb-3 text-secondary">Stavke narudžbe</h3>
+    <div class="card shadow-sm">
+        <ul class="list-group list-group-flush">
+            @foreach (var item in Model.OrderItems)
+            {
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <div>
+                        <h5 class="mb-1">@item.Product.Name</h5>
+                        <small class="text-muted">Količina: @item.Quantity</small>
+                    </div>
+                    <span class="badge bg-primary rounded-pill p-2 fs-6">
+                        @item.Quantity &times; @item.UnitPrice € = @(item.Quantity * item.UnitPrice) €
+                    </span>
+                </li>
+            }
+        </ul>
+    </div>
+
+
+    <div class="text-center mt-5">
+        <a asp-action="Index" class="btn btn-primary btn-lg px-5">Nastavi kupovinu</a>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        setTimeout(function() {
+            var alert = document.querySelector('.alert');
+            if (alert) {
+                var bsAlert = new bootstrap.Alert(alert);
+                bsAlert.close();
+            }
+        }, 5000); 
+    </script>
+}

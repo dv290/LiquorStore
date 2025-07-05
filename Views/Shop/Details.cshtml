@@ -1,0 +1,61 @@
+﻿@model LiquorStore.Model.Product
+
+@{
+    ViewData["Title"] = "Detalji Proizvoda";
+}
+
+<h1 class="mb-4 text-center text-primary">Detalji Proizvoda</h1>
+
+<div class="card shadow-sm border-0 p-4" style="background-color: rgba(255, 255, 255, 0.85); border-radius: 16px;">
+    <div class="row">
+        <div class="col-md-8">
+            <h3 class="text-dark font-weight-bold mb-4">@Model.Name</h3>
+            <dl class="row">
+                <dt class="col-sm-4">Opis</dt>
+                <dd class="col-sm-8">@Model.Description</dd>
+
+                <dt class="col-sm-4">Cijena</dt>
+                <dd class="col-sm-8">@Model.Price.ToString("0.00") kn</dd>
+
+                <dt class="col-sm-4">Na skladištu</dt>
+                <dd class="col-sm-8">@Model.StockQuantity kom</dd>
+
+                <dt class="col-sm-4">Kategorija</dt>
+                <dd class="col-sm-8">@Model.Category?.Name</dd>
+
+                <dt class="col-sm-4">Proizvođač</dt>
+                <dd class="col-sm-8">@Model.Manufacturer?.Name</dd>
+
+                <dt class="col-sm-4">Alkohol</dt>
+                <dd class="col-sm-8">@Model.AlcoholContent %</dd>
+
+                <dt class="col-sm-4">Volumen</dt>
+                <dd class="col-sm-8">@Model.VolumeMl ml</dd>
+            </dl>
+        </div>
+
+        <div class="col-md-4 text-center">
+            @if (!string.IsNullOrEmpty(Model.ImageUrl))
+            {
+                <img src="@Model.ImageUrl" alt="@Model.Name" class="img-fluid rounded product-img shadow-sm" />
+            }
+            else
+            {
+                <div class="text-muted">Nema slike</div>
+            }
+        </div>
+    </div>
+</div>
+
+<div class="mt-4 d-flex justify-content-between align-items-center">
+    <a asp-action="Index" class="btn btn-outline-secondary">
+        <i class="fas fa-arrow-left"></i> Nazad na popis
+    </a>
+
+    @if (User.Identity.IsAuthenticated)
+    {
+        <a asp-action="AddToCart" asp-route-id="@Model.ProductId" class="btn btn-primary">
+            <i class="fas fa-cart-plus"></i> Dodaj u košaricu
+        </a>
+    }
+</div>

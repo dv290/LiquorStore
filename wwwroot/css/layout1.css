@@ -1,0 +1,39 @@
+﻿
+body {
+    font-family: 'Rubik', sans-serif;
+}
+
+.navbar-brand {
+    font-weight: 600;
+    font-size: 1.4rem;
+    color: #4e54c8 !important;
+}
+
+.nav-link {
+    font-weight: 500;
+    color: #333 !important;
+    transition: color 0.3s ease;
+}
+
+    .nav-link:hover {
+        color: #4e54c8 !important;
+    }
+
+
+.navbar-nav .nav-link {
+    font-weight: 700; /
+    color: #4100ff !important; 
+    text-shadow: 0 0 8px #0034ff;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+    .navbar-nav .nav-link:hover,
+    .navbar-nav .nav-link:focus {
+        color: #ff70c8 !important; 
+        text-shadow: 0 0 15px #ff70c8;
+    }
+
+    .navbar-nav .nav-link.active {
+        color: #ff1aa3 !important;
+        text-shadow: 0 0 20px #ff1aa3;
+    }

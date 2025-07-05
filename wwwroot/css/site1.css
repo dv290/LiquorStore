@@ -1,0 +1,129 @@
+﻿html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin-bottom: 60px;
+}
+
+body {
+    background: linear-gradient(135deg, #fdfcfb 0%, #e2d1c3 50%, #c6d6e3 100%);
+    background-attachment: fixed;
+    background-size: cover;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Hero sekcija */
+.hero-section {
+    background: rgba(0, 0, 0, 0.65);
+    color: white;
+    padding: 80px 20px;
+    border-radius: 12px;
+    backdrop-filter: blur(4px);
+}
+
+/* Kartice kategorija */
+.category-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 12px;
+    border: none;
+}
+
+    .category-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    }
+
+/* Ikone kategorija */
+.category-icon {
+    height: 100px;
+    margin-bottom: 15px;
+}
+
+/* Sparkle efekt pozadina */
+.sparkle-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    background: transparent;
+    z-index: 0;
+}
+
+.sparkle {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: white;
+    border-radius: 50%;
+    opacity: 0.6;
+    animation: sparkleAnim 6s infinite ease-in-out;
+    filter: blur(2px);
+}
+
+@keyframes sparkleAnim {
+    0% {
+        transform: translateY(0) scale(1);
+        opacity: 0.3;
+    }
+
+    50% {
+        transform: translateY(-30px) scale(1.4);
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: translateY(0) scale(1);
+        opacity: 0.3;
+    }
+}
+
+.card {
+    background-color: rgba(255, 255, 255, 0.85);
+    border-radius: 16px;
+    padding: 20px;
+}
+
+/* Optional: Subtle product image border */
+.product-img {
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 12px;
+    border: 1px solid #ddd;
+}
+
+/* Fun hover effect for the main CTA button */
+.sparkle-hover {
+    border: 2px solid #ff70c8;
+    color: #ff70c8;
+    background-color: transparent;
+    transition: all 0.3s ease;
+    text-shadow: 0 0 10px #ff70c8;
+}
+
+    .sparkle-hover:hover {
+        background-color: #ff70c8;
+        color: white;
+        box-shadow: 0 0 15px #ff70c8;
+    }

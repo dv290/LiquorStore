@@ -1,0 +1,51 @@
+﻿@model LiquorStore.Model.Manufacturer
+
+@{
+    ViewData["Title"] = "Obriši proizvođača";
+}
+
+<h1>Obriši proizvođača</h1>
+
+<h3>Jeste li sigurni da želite obrisati ovog proizvođača?</h3>
+<div>
+    <h4>Proizvođač</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ContactEmail)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ContactEmail)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PhoneNumber)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PhoneNumber)
+        </dd>
+    </dl>
+
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="ManufacturerId" />
+        <input type="submit" value="Obriši" class="btn btn-danger" /> |
+        <a asp-action="Index">Natrag na listu</a>
+    </form>
+</div>

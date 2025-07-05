@@ -1,0 +1,118 @@
+﻿@model LiquorStore.Model.Order
+
+@{
+    ViewData["Title"] = "Detalji narudžbe";
+}
+
+<h1>Detalji narudžbe</h1>
+
+<div>
+    <h4>Narudžba #@Model.OrderId</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.OrderDate)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.OrderDate)
+        </dd>
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.TotalAmount)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.TotalAmount)
+        </dd>
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.OrderStatus)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.OrderStatus)
+        </dd>
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.User)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.User.UserName) @* IZMIJENJENO: .Username -> .UserName *@
+        </dd>
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.ShippingAddress)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.ShippingAddress)
+        </dd>
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.ShippingCity)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.ShippingCity)
+        </dd>
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.ShippingPostalCode)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.ShippingPostalCode)
+        </dd>
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.ShippingCountry) 
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.ShippingCountry) 
+        </dd>
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.ContactPhoneNumber) 
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.ContactPhoneNumber) 
+        </dd>
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.ContactEmail) 
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.ContactEmail) 
+        </dd>
+    </dl>
+
+    <h3>Stavke narudžbe</h3>
+    <hr />
+    @if (Model.OrderItems != null && Model.OrderItems.Any())
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Proizvod</th>
+                    <th>Količina</th>
+                    <th>Cijena po jedinici (u trenutku narudžbe)</th>
+                    <th>Ukupno za stavku</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.OrderItems)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Product.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Quantity)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.UnitPrice)
+                        </td>
+                        <td>
+                            @(item.Quantity* item.UnitPrice)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>Nema stavki za ovu narudžbu.</p>
+    }
+</div>
+<br />
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.OrderId" class="btn btn-primary">Uredi</a> |
+    <a asp-action="Index">Natrag na popis narudžbi</a>
+</div>

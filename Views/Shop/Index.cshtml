@@ -1,0 +1,51 @@
+﻿@model IEnumerable<LiquorStore.Model.Product>
+
+@{
+    ViewData["Title"] = "Naša Ponuda Pića";
+}
+
+<div class="text-center mb-5">
+    <h1 class="display-4 fw-bold">Naša Ponuda Pića</h1>
+    <p class="lead">Istražite našu široku ponudu piva, vina i žestokih pića.</p>
+</div>
+
+<div class="container">
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+        @foreach (var item in Model)
+        {
+            <div class="col">
+                <div class="card product-card h-100 shadow-sm">
+                    @if (!string.IsNullOrEmpty(item.ImageUrl))
+                    {
+                        <img src="@item.ImageUrl" class="card-img-top product-img" alt="@item.Name">
+                    }
+                    else
+                    {
+                        <img src="/images/placeholder.png" class="card-img-top product-img" alt="Nema slike">
+                    }
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title product-name">@Html.DisplayFor(modelItem => item.Name)</h5>
+                        <p class="card-text product-details">
+                            <small class="text-muted">@Html.DisplayFor(modelItem => item.Category.Name) | @Html.DisplayFor(modelItem => item.Manufacturer.Name)</small>
+                        </p>
+                        <div class="mt-auto">
+                            <div class="product-price mb-3">
+                                <span class="price-value">@Html.DisplayFor(modelItem => item.Price)</span> <span class="currency">€</span>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <a asp-action="Details" asp-route-id="@item.ProductId" class="btn btn-outline-primary btn-sm product-btn">Detalji</a>
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                    <form asp-action="AddToCart" method="post">
+                                        <input type="hidden" name="productId" value="@item.ProductId" />
+                                        <button type="submit" class="btn btn-primary btn-sm product-btn">Dodaj u košaricu</button>
+                                    </form>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

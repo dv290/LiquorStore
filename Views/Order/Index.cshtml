@@ -1,0 +1,90 @@
+﻿@model IEnumerable<LiquorStore.Model.Order>
+
+@{
+    ViewData["Title"] = "Popis narudžbi";
+}
+
+<h1>Popis narudžbi</h1>
+
+<p>
+    <a asp-action="Create">Kreiraj novu narudžbu</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TotalAmount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderStatus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.User)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ShippingAddress)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ShippingCity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ShippingPostalCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ShippingCountry) 
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ContactPhoneNumber) 
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ContactEmail) 
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OrderDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalAmount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OrderStatus)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.User.UserName) 
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ShippingAddress)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ShippingCity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ShippingPostalCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ShippingCountry)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ContactPhoneNumber) 
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ContactEmail) 
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.OrderId">Uredi</a> |
+                    <a asp-action="Details" asp-route-id="@item.OrderId">Detalji</a> |
+                    <a asp-action="Delete" asp-route-id="@item.OrderId">Izbriši</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
